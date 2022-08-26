@@ -10,21 +10,6 @@ import datetime as dt
 from datetime import datetime
 
 # Create your views here.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class ClassViewSet(viewsets.ModelViewSet):
-    queryset = Class.objects.all()
-    serializer_class = ClassSerializer
-
-class AssignmentTypeViewSet(viewsets.ModelViewSet):
-    queryset = AssignmentType.objects.all()
-    serializer_class = AssignmentTypeSerializer
-
-class AssignmentViewSet(viewsets.ModelViewSet):
-    queryset = Assignment.objects.all()
-    serializer_class = AssignmentSerializer
 
 @api_view(['GET'])
 def get_assignments(request):
@@ -63,7 +48,7 @@ def log_me_in(request):
     try:
         user = User.objects.get(email=request.GET.get('email'))
     except:
-        return Response("User doesn't exist")
+        return Response(-1)
     
     if(user.password == request.GET.get('password')):
         print("Success")

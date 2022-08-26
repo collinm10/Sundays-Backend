@@ -18,12 +18,6 @@ from django.urls import path
 from rest_framework import routers
 from sundays import views
 
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'classes', views.ClassViewSet)
-router.register(r'assignmenttypes', views.AssignmentTypeViewSet)
-router.register(r'assignments', views.AssignmentViewSet)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('week-assignments/', views.get_assignments ),
@@ -37,5 +31,3 @@ urlpatterns = [
     path('sign-me-up/', views.sign_me_up),
     path('update-assignment/', views.update_assignment)
 ]
-
-urlpatterns+=router.urls
