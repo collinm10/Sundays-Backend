@@ -1,3 +1,4 @@
+from multiprocessing import AuthenticationError
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -8,6 +9,7 @@ from django.core import serializers
 import json
 import datetime as dt
 from datetime import datetime
+from django.contrib.auth import authenticate
 
 # Create your views here.
 
@@ -45,16 +47,12 @@ def get_classes(request):
 
 @api_view(['GET'])
 def log_me_in(request):
-    try:
-        user = User.objects.get(email=request.GET.get('email'))
-    except:
-        return Response(-1)
+    user = authenticate(username=request.GET.get('email'), password=request.GET.get('password'))
     
-    if(user.password == request.GET.get('password')):
-        print("Success")
-        return Response(user.pk)
+    if user is not None:
+        print("hit")
+        return Response(user.id)
     else:
-        print("Failed")
         return Response(-1)
 
 @api_view(['POST'])
@@ -62,9 +60,12 @@ def sign_me_up(request):
     body_uni = request.body.decode('utf-8')
     body = json.loads(body_uni)
     print(body)
-    nu = User.objects.create(username=body['email'], email=body['email'], password=body['password'])
+    nu = User.objects.create_user(body['email'], body['email'], body['password'])
     
-    return Response(nu.pk)
+    if nu is not None:
+        return Response(nu.id)
+    else:
+        return -1
 
 @api_view(['GET'])
 def get_ass_types_class(request):

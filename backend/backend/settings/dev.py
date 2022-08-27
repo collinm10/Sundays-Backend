@@ -6,10 +6,7 @@ DEBUG = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sundays',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'Ac3ZY!4yMJNKdqH'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }

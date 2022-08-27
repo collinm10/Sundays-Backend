@@ -111,8 +111,10 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'sundays.User'
+
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'https://sundays-frontend-5ew5l.ondigitalocean.app',
-    'https://sundays-app.com/',
+    'https://sundays-app.com',
 ]
